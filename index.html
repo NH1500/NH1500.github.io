@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nathan's Maker Portfolio</title>
+    <title>Nathan Hryn | Engineering Portfolio</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -84,53 +84,82 @@
     </style>
 </head>
 <body>
-    <h1>Nathan's Maker Portfolio</h1>
+    <h1>Nathan Hryn | Engineering Portfolio</h1>
     <div id="app"></div>
 
     <script>
-        // Portfolio data structure
+        // Portfolio data structure with professional titles
         const portfolioData = {
-            "Penn Internship": {
-                description: "Research and engineering work at Penn",
+            "Research & Development - Penn Engineering": {
+                description: "Tribology research instrumentation and experimental design",
                 subprojects: {
-                    "Tribometer fixtures": {
-                        description: "Custom fixtures for grease testing",
+                    "Tribometer Grease Testing System": {
+                        description: "Custom fixtures enabling quantitative grease lubrication measurements on oil-designed instrumentation",
                         items: [1, 2, 3, 4, 5, 6, 7, 8, 9]
                     },
-                    "AFM enclosure door": {
-                        description: "Sliding bifold door for AFM",
+                    "AFM Environmental Chamber Access Door": {
+                        description: "Vibration-isolated sliding bifold door system for atomic force microscopy enclosure",
                         items: [10, 11]
                     },
-                    "Nanoscale friction demonstration": {
-                        description: "3D-printed demonstration pieces",
+                    "Nanoscale Friction Demonstration": {
+                        description: "3D-printed educational models illustrating superlubricity and atomic stick-slip phenomena",
                         items: [12, 13, 14]
                     }
                 }
             },
-            "MOUS3D": {
-                description: "Independent CAD mouse prototype",
+            "MOUS3D - Six-Degree-of-Freedom CAD Input Device": {
+                description: "Independent hardware development of novel 3D navigation controller",
                 items: [15, 16, 17]
             },
-            "Novel Mountain Bike Frame": {
-                description: "In-progress 5-bar linkage frame design",
+            "Mountain Bike Suspension R&D": {
+                description: "Novel 5-bar linkage frame design with optimized kinematics for enduro application",
                 items: [18, 19, 20, 21]
             },
-            "Mesh-based modelling": {
-                description: "Porsche 911 and Volvo S60 replicas",
+            "Automotive Surface Modeling": {
+                description: "High-fidelity mesh-based reconstruction of production vehicles for 3D printing",
                 items: [22]
             },
-            "Architecture competitions": {
-                description: "TSA architectural design entries",
+            "Architectural Design Competition": {
+                description: "TSA competition entries: vacation home and museum conceptual designs",
                 items: [23]
             },
-            "Chain damper": {
-                description: "3D-printed MTB chain damper",
+            "Mountain Bike Chain Management System": {
+                description: "3D-printed elastomeric chain damper for noise and impact reduction",
                 items: [24]
             },
-            "Lead Holder": {
-                description: "3D-printed pencil lead holder",
+            "Ergonomic Writing Instrument": {
+                description: "3D-printed mechanical pencil lead holder with integrated fidget mechanism",
                 items: [25]
             }
+        };
+
+        // Professional media titles based on captions
+        const mediaTitles = {
+            1: "Grease Scoops and Lid In Situ",
+            2: "Tribometer Lid Design Evolution",
+            3: "Lid Assembly Drawing",
+            4: "Lid Part Drawings",
+            5: "Grease Scoop Assembly Animation",
+            6: "Scoops Maintaining Flooded Lubrication",
+            7: "Scoop Design Iterations",
+            8: "Scoop Part Drawings",
+            9: "Stribeck Curve Comparison Results",
+            10: "AFM Door Design Overview",
+            11: "Door Hardware Technical Drawing",
+            12: "Superlubricity Demonstration Model",
+            13: "Atomic Structure CAD Prototypes",
+            14: "Lattice Generation MATLAB Script",
+            15: "MOUS3D Concept Sketches",
+            16: "Final Prototype Assembly",
+            17: "Build Procedure and BOM",
+            18: "5-Bar Linkage Frame vs Prior Art",
+            19: "Frame CAD Model",
+            20: "Leverage Ratio Kinematic Analysis",
+            21: "Rear Axle Path Comparison",
+            22: "Porsche 911 and Volvo S60 Models",
+            23: "Vacation Home and Museum Floor Plans",
+            24: "Chain Damper Installation",
+            25: "Lead Holder Design"
         };
 
         // Captions data
@@ -190,7 +219,7 @@
         function renderHome() {
             const app = document.getElementById('app');
             app.innerHTML = `
-                <div class="breadcrumb">Home</div>
+                <div class="breadcrumb">Portfolio</div>
                 <div class="gallery">
                     ${Object.entries(portfolioData).map(([name, data]) => `
                         <div class="item" onclick="showProject('${name}')">
@@ -204,7 +233,6 @@
         }
 
         function getThumbnail(projectName, data) {
-            // Get first item from project for thumbnail
             if (data.items) return `${data.items[0]}.${getImageExt(data.items[0])}`;
             if (data.subprojects) {
                 const firstSub = Object.values(data.subprojects)[0];
@@ -218,12 +246,11 @@
             const app = document.getElementById('app');
             
             if (project.subprojects) {
-                // Show subprojects
                 app.innerHTML = `
                     <div class="breadcrumb">
-                        <a href="#" onclick="renderHome(); return false;">Home</a> / ${projectName}
+                        <a href="#" onclick="renderHome(); return false;">Portfolio</a> / ${projectName}
                     </div>
-                    <a href="#" class="back-btn" onclick="renderHome(); return false;">← Back to Projects</a>
+                    <a href="#" class="back-btn" onclick="renderHome(); return false;">← Back to Portfolio</a>
                     <div class="gallery">
                         ${Object.entries(project.subprojects).map(([subName, subData]) => `
                             <div class="item" onclick="showSubproject('${projectName}', '${subName}')">
@@ -235,7 +262,6 @@
                     </div>
                 `;
             } else {
-                // Show media items directly
                 showSubproject(projectName, null);
             }
         }
@@ -246,8 +272,8 @@
             const app = document.getElementById('app');
             
             const breadcrumb = subprojectName 
-                ? `<a href="#" onclick="renderHome(); return false;">Home</a> / <a href="#" onclick="showProject('${projectName}'); return false;">${projectName}</a> / ${subprojectName}`
-                : `<a href="#" onclick="renderHome(); return false;">Home</a> / ${projectName}`;
+                ? `<a href="#" onclick="renderHome(); return false;">Portfolio</a> / <a href="#" onclick="showProject('${projectName}'); return false;">${projectName}</a> / ${subprojectName}`
+                : `<a href="#" onclick="renderHome(); return false;">Portfolio</a> / ${projectName}`;
             
             const backAction = subprojectName 
                 ? `showProject('${projectName}')` 
@@ -259,8 +285,8 @@
                 <div class="gallery">
                     ${items.map(num => `
                         <div class="item" onclick="showMedia(${num}, '${projectName}', '${subprojectName || ''}')">
-                            <img src="portfolio/thumbs/${num}.${getImageExt(num)}" alt="Item ${num}">
-                            <h3>Item ${num}</h3>
+                            <img src="portfolio/thumbs/${num}.${getImageExt(num)}" alt="${mediaTitles[num]}">
+                            <h3>${mediaTitles[num]}</h3>
                             <p>${captions[num].substring(0, 100)}...</p>
                         </div>
                     `).join('')}
@@ -283,7 +309,7 @@
                 mediaElement = `<embed src="portfolio/media/${num}.${media.ext}" type="application/pdf" width="100%" height="800px">
                 <p><a href="portfolio/media/${num}.${media.ext}" target="_blank">Open PDF in new tab</a></p>`;
             } else {
-                mediaElement = `<img src="portfolio/media/${num}.${media.ext}" alt="Item ${num}" style="max-width: 100%;">`;
+                mediaElement = `<img src="portfolio/media/${num}.${media.ext}" alt="${mediaTitles[num]}" style="max-width: 100%;">`;
             }
             
             const backAction = subprojectName 
@@ -291,8 +317,8 @@
                 : `showProject('${projectName}')`;
             
             const breadcrumb = subprojectName
-                ? `<a href="#" onclick="renderHome(); return false;">Home</a> / <a href="#" onclick="showProject('${projectName}'); return false;">${projectName}</a> / <a href="#" onclick="${backAction}; return false;">${subprojectName}</a> / Item ${num}`
-                : `<a href="#" onclick="renderHome(); return false;">Home</a> / <a href="#" onclick="${backAction}; return false;">${projectName}</a> / Item ${num}`;
+                ? `<a href="#" onclick="renderHome(); return false;">Portfolio</a> / <a href="#" onclick="showProject('${projectName}'); return false;">${projectName}</a> / <a href="#" onclick="${backAction}; return false;">${subprojectName}</a> / ${mediaTitles[num]}`
+                : `<a href="#" onclick="renderHome(); return false;">Portfolio</a> / <a href="#" onclick="${backAction}; return false;">${projectName}</a> / ${mediaTitles[num]}`;
             
             app.innerHTML = `
                 <div class="breadcrumb">${breadcrumb}</div>
@@ -300,7 +326,7 @@
                 <div class="media-view">
                     ${mediaElement}
                     <div class="caption">
-                        <strong>Item ${num}</strong>
+                        <strong>${mediaTitles[num]}</strong>
                         <p>${caption}</p>
                     </div>
                 </div>
