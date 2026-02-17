@@ -84,7 +84,10 @@
     </style>
 </head>
 <body>
-    <h1>Nathan Hryn | Engineering Portfolio</h1>
+    <header style="text-align: center; padding: 40px 20px; border-bottom: 3px solid #0066cc; margin-bottom: 30px;">
+        <h1 style="margin: 0; font-size: 42px; color: #222; font-weight: 300; letter-spacing: 2px;">NATHAN HRYNIEWICZ</h1>
+        <p style="margin: 15px 0 0; font-size: 18px; color: #666; letter-spacing: 3px; text-transform: uppercase;">Engineering Portfolio</p>
+    </header>
     <div id="app"></div>
 
     <script>
@@ -219,8 +222,7 @@
         function renderHome() {
             const app = document.getElementById('app');
             app.innerHTML = `
-                <div class="breadcrumb">Portfolio</div>
-                <div class="gallery">
+                <div class="gallery" style="margin-top: 10px;">
                     ${Object.entries(portfolioData).map(([name, data]) => `
                         <div class="item" onclick="showProject('${name}')">
                             <img src="portfolio/thumbs/${getThumbnail(name, data)}" alt="${name}">
