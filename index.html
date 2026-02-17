@@ -1,10 +1,314 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="refresh" content="0; URL='https://github.com/NH1500'" />
-  </head>
-  <body>
-  </body>
-</html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nathan's Maker Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 { color: #333; }
+        .breadcrumb {
+            margin: 20px 0;
+            padding: 10px;
+            background: #fff;
+            border-radius: 4px;
+        }
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        .item:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+        .item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .item h3 {
+            margin: 10px 0 5px;
+            font-size: 18px;
+            color: #333;
+        }
+        .item p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        .media-view {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .media-view img, .media-view video {
+            max-width: 100%;
+            height: auto;
+        }
+        .caption {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #0066cc;
+        }
+        .hidden { display: none; }
+        .back-btn {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 8px 16px;
+            background: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .back-btn:hover { background: #0052a3; }
+    </style>
+</head>
+<body>
+    <h1>Nathan's Maker Portfolio</h1>
+    <div id="app"></div>
 
+    <script>
+        // Portfolio data structure
+        const portfolioData = {
+            "Penn Internship": {
+                description: "Research and engineering work at Penn",
+                subprojects: {
+                    "Tribometer fixtures": {
+                        description: "Custom fixtures for grease testing",
+                        items: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    },
+                    "AFM enclosure door": {
+                        description: "Sliding bifold door for AFM",
+                        items: [10, 11]
+                    },
+                    "Nanoscale friction demonstration": {
+                        description: "3D-printed demonstration pieces",
+                        items: [12, 13, 14]
+                    }
+                }
+            },
+            "MOUS3D": {
+                description: "Independent CAD mouse prototype",
+                items: [15, 16, 17]
+            },
+            "Novel Mountain Bike Frame": {
+                description: "In-progress 5-bar linkage frame design",
+                items: [18, 19, 20, 21]
+            },
+            "Mesh-based modelling": {
+                description: "Porsche 911 and Volvo S60 replicas",
+                items: [22]
+            },
+            "Architecture competitions": {
+                description: "TSA architectural design entries",
+                items: [23]
+            },
+            "Chain damper": {
+                description: "3D-printed MTB chain damper",
+                items: [24]
+            },
+            "Lead Holder": {
+                description: "3D-printed pencil lead holder",
+                items: [25]
+            }
+        };
+
+        // Captions data
+        const captions = {
+            1: "To address unreliable grease testing on an oil-designed tribometer, I designed a custom lid and grease scoops that control flow and contamination, enabling repeatable grease measurements, shown here in use (aluminum lid attached on top of instrument, white and purple grease scoops installed inside pot).",
+            2: "Three iterations of the clear tribometer lid. Early printed versions enabled grease starvation monitoring but were limited by temperature and solvent compatibility, even with different material choice. The final machined aluminum design with a glass window and O-ring removed these constraints.",
+            3: "Assembly drawing of the final clear lid design that was sent to the machine shop.",
+            4: "Part drawings of the final clear lid design that were sent to the machine shop.",
+            5: "Assembly animation of the two final flow-regulating grease scoops in the tribometer.",
+            6: "In-use image of the grease scoops installed in the tribometer, maintaining fully flooded lubrication by directing grease accumulation above the track.",
+            7: "Two Iterations of the grease scoop pair. Early 3D-printed PLA versions achieved adequate flow control but lacked temperature and chemical resistance, and the porous material somewhat restricted flow. The final machined PTFE version addressed all of these constraints.",
+            8: "Part drawings of both scoops that were sent to the machine shop.",
+            9: "Stribeck-curve results comparing no scoop, commercial PCS scoops, and the custom scoops. Friction is plotted against rolling speed, with one standard deviation over three trials shaded. The custom setup achieves higher speeds with significantly improved repeatability.",
+            10: "To address limited access and awkward ergonomics that hindered use of the AFM environmental enclosure, I designed a sliding bifold door that improves usability while maintaining vibration isolation.",
+            11: "Technical drawing and fabricated components of the custom door mounting hardware, shown alongside the commercial door guide it interfaces with.",
+            12: "3D-printed demonstration illustrating superlubricity and atomic stick-slip friction found in graphene, designed for a PhD thesis defense.",
+            13: "CAD models of small prototypes of the atomic structure replica.",
+            14: "MATLAB Script to generate a lattice structure that was imported into the superlubricity demonstration CAD model.",
+            15: "Early sketches for Mous3D, a self-driven project exploring a novel 6-DoF CAD input device. These sketches focus on interaction concepts, ergonomics, and how hand motion could translate to more intuitive and efficient 3D navigation.",
+            16: "Final prototype of the MOUS3D that features an ergonomic shape, a 3-DoF dual-sensor trackball (not found in conventional trackball mice) for directly proportional orbiting, and an additional mouse button dedicated to panning.",
+            17: "Full build procedure for the prototype MOUS3D, with the bill of materials.",
+            18: "Work-in-progress enduro mountain bike frame design featuring a novel 5-bar linkage inspired by an earlier patent proposing perfect pedaling rigidity with active suspension while descending: the mountain biking 'Holy Grail.' Frame developed with the intent to fabricate and ride the frame. Comparison with the 2016 patent design overlaid in blue. My design preserves the scissor-style linkage while reducing link count and substantially reworking pivot locations to address kinematic issues in the original design.",
+            19: "Early CAD model of custom mountain bike frame featuring scissor-style linkage.",
+            20: "Leverage ratio vs suspension travel plot for 3 frames: the 2016 design, my design, and a popular modern enduro frame. My design preserves the initial regressive portion of the leverage curve from the original design to prevent a harsh transition from fully stiff pedaling to fully open rebound. However, it then transitions to a progressive curve, which is necessary for high-performance mountain bikes to offer small-bump sensitivity and bottom-out resistance—the biggest shortcoming of the older design.",
+            21: "Rear axle path curves for the same three bikes. The significant rearward axle path in my design is characteristic of modern high-performance enduro bikes because of the additional traction it offers in rough terrain. This was achieved by shifting the original pivot points to raise the instant center.",
+            22: "Model images and renders of two replica cars: my dream car, a 1983 Porsche 911 (964), and my actual car, a manual 2006 Volvo S60 T5. Models were also used to 3D-print scale replicas. Both projects served as an introduction to mesh-driven modeling.",
+            23: "Floor plans and renders of two architectural models. Both were for TSA architectural design competitions, where the prompts were to design a vacation home and a museum.",
+            24: "A 3D-printed chain damper for my brother's mountain bike that reduces the sound and impact from chain slap due to a cheap derailleur.",
+            25: "A 3D-printed ergonomic pencil lead holder/fidget toy."
+        };
+
+        // Get file extension for media
+        function getMediaType(num) {
+            const mediaFiles = {
+                1: { type: 'video', ext: 'MOV' },
+                5: { type: 'video', ext: 'mp4' },
+                10: { type: 'video', ext: 'mp4' },
+                25: { type: 'video', ext: 'mp4' },
+                3: { type: 'pdf', ext: 'pdf' },
+                4: { type: 'pdf', ext: 'pdf' },
+                8: { type: 'pdf', ext: 'pdf' },
+                14: { type: 'pdf', ext: 'pdf' },
+                17: { type: 'pdf', ext: 'pdf' }
+            };
+            return mediaFiles[num] || { type: 'image', ext: getImageExt(num) };
+        }
+
+        function getImageExt(num) {
+            const jpegFiles = [12];
+            const pngFiles = [7, 9, 18, 19, 20, 21];
+            if (jpegFiles.includes(num)) return 'jpeg';
+            if (pngFiles.includes(num)) return 'png';
+            return 'jpg';
+        }
+
+        // Render functions
+        function renderHome() {
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                <div class="breadcrumb">Home</div>
+                <div class="gallery">
+                    ${Object.entries(portfolioData).map(([name, data]) => `
+                        <div class="item" onclick="showProject('${name}')">
+                            <img src="portfolio/thumbs/${getThumbnail(name, data)}" alt="${name}">
+                            <h3>${name}</h3>
+                            <p>${data.description}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function getThumbnail(projectName, data) {
+            // Get first item from project for thumbnail
+            if (data.items) return `${data.items[0]}.${getImageExt(data.items[0])}`;
+            if (data.subprojects) {
+                const firstSub = Object.values(data.subprojects)[0];
+                return `${firstSub.items[0]}.${getImageExt(firstSub.items[0])}`;
+            }
+            return '1.jpg';
+        }
+
+        function showProject(projectName) {
+            const project = portfolioData[projectName];
+            const app = document.getElementById('app');
+            
+            if (project.subprojects) {
+                // Show subprojects
+                app.innerHTML = `
+                    <div class="breadcrumb">
+                        <a href="#" onclick="renderHome(); return false;">Home</a> / ${projectName}
+                    </div>
+                    <a href="#" class="back-btn" onclick="renderHome(); return false;">← Back to Projects</a>
+                    <div class="gallery">
+                        ${Object.entries(project.subprojects).map(([subName, subData]) => `
+                            <div class="item" onclick="showSubproject('${projectName}', '${subName}')">
+                                <img src="portfolio/thumbs/${subData.items[0]}.${getImageExt(subData.items[0])}" alt="${subName}">
+                                <h3>${subName}</h3>
+                                <p>${subData.description}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else {
+                // Show media items directly
+                showSubproject(projectName, null);
+            }
+        }
+
+        function showSubproject(projectName, subprojectName) {
+            const project = portfolioData[projectName];
+            const items = subprojectName ? project.subprojects[subprojectName].items : project.items;
+            const app = document.getElementById('app');
+            
+            const breadcrumb = subprojectName 
+                ? `<a href="#" onclick="renderHome(); return false;">Home</a> / <a href="#" onclick="showProject('${projectName}'); return false;">${projectName}</a> / ${subprojectName}`
+                : `<a href="#" onclick="renderHome(); return false;">Home</a> / ${projectName}`;
+            
+            const backAction = subprojectName 
+                ? `showProject('${projectName}')` 
+                : `renderHome()`;
+            
+            app.innerHTML = `
+                <div class="breadcrumb">${breadcrumb}</div>
+                <a href="#" class="back-btn" onclick="${backAction}; return false;">← Back</a>
+                <div class="gallery">
+                    ${items.map(num => `
+                        <div class="item" onclick="showMedia(${num}, '${projectName}', '${subprojectName || ''}')">
+                            <img src="portfolio/thumbs/${num}.${getImageExt(num)}" alt="Item ${num}">
+                            <h3>Item ${num}</h3>
+                            <p>${captions[num].substring(0, 100)}...</p>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function showMedia(num, projectName, subprojectName) {
+            const app = document.getElementById('app');
+            const media = getMediaType(num);
+            const caption = captions[num];
+            
+            let mediaElement;
+            if (media.type === 'video') {
+                mediaElement = `<video controls style="max-width: 100%;">
+                    <source src="portfolio/media/${num}.${media.ext}" type="video/${media.ext === 'mov' ? 'quicktime' : media.ext}">
+                    Your browser does not support the video tag.
+                </video>`;
+            } else if (media.type === 'pdf') {
+                mediaElement = `<embed src="portfolio/media/${num}.${media.ext}" type="application/pdf" width="100%" height="800px">
+                <p><a href="portfolio/media/${num}.${media.ext}" target="_blank">Open PDF in new tab</a></p>`;
+            } else {
+                mediaElement = `<img src="portfolio/media/${num}.${media.ext}" alt="Item ${num}" style="max-width: 100%;">`;
+            }
+            
+            const backAction = subprojectName 
+                ? `showSubproject('${projectName}', '${subprojectName}')`
+                : `showProject('${projectName}')`;
+            
+            const breadcrumb = subprojectName
+                ? `<a href="#" onclick="renderHome(); return false;">Home</a> / <a href="#" onclick="showProject('${projectName}'); return false;">${projectName}</a> / <a href="#" onclick="${backAction}; return false;">${subprojectName}</a> / Item ${num}`
+                : `<a href="#" onclick="renderHome(); return false;">Home</a> / <a href="#" onclick="${backAction}; return false;">${projectName}</a> / Item ${num}`;
+            
+            app.innerHTML = `
+                <div class="breadcrumb">${breadcrumb}</div>
+                <a href="#" class="back-btn" onclick="${backAction}; return false;">← Back to Gallery</a>
+                <div class="media-view">
+                    ${mediaElement}
+                    <div class="caption">
+                        <strong>Item ${num}</strong>
+                        <p>${caption}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initial render
+        renderHome();
+    </script>
+</body>
 </html>

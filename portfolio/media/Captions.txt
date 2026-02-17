@@ -1,0 +1,58 @@
+Project: Penn Internship:
+Subproject: tribometer fixtures:
+1. To address unreliable grease testing on an oil-designed tribometer, I designed a custom lid and grease scoops that control flow and contamination, enabling repeatable grease measurements, shown here in use (aluminum lid attached on top of instrument, white and purple grease scoops installed inside pot). 
+
+2. Three iterations of the clear tribometer lid. Early printed versions enabled grease starvation monitoring but were limited by temperature and solvent compatibility, even with different material choice. The final machined aluminum design with a glass window and O-ring removed these constraints.
+
+3. Assembly drawing of the final clear lid design that was sent to the machine shop.
+
+4. Part drawings of the final clear lid design that was sent to the machine shop.
+
+5. Assembly animation of the two final flow-regulating grease scoops in the tribometer.
+
+6. In-use image of the grease scoops installed in the tribometer, maintaining fully flooded lubrication by directing grease accumulation above the track.
+
+7. Two Iterations of the grease scoop pair. Early 3D-printed PLA versions achieved adequate flow control but lacked temperature and chemical resistance, and the porous material somewhat restricted flow. The final machined PTFE version addressed all of these constraints.
+
+8. Part drawings of both scoops that were sent to the machine shop.
+
+9. Stribeck-curve results comparing no scoop, commercial PCS scoops, and the custom scoops. Friction is plotted against rolling speed, with one standard deviation over three trials shaded. The custom setup achieves higher speeds with significantly improved repeatability.
+
+Subproject: AFM enclosure door
+10. To address limited access and awkward ergonomics that hindered use of the AFM environmental enclosure, I designed a sliding bifold door that improves usability while maintaining vibration isolation.
+
+11. Technical drawing and fabricated components of the custom door mounting hardware, shown alongside the commercial door guide it interfaces with.
+
+Subproject: Nanoscale friction demonstration piece
+12. 3D-printed demonstration illustrating superlubricity and atomic stick–slip friction found in graphene, designed for a PhD thesis defense.
+
+13. CAD models of small prototypes of the atomic structure replica.
+
+14. MATLAB Script to generate a lattice structure that was imported into the superlubricity demonstration CAD model.
+
+Project: MOUS3D, independent CAD mouse prototype
+15. Early sketches for Mous3D, a self-driven project exploring a novel 6-DoF CAD input device. These sketches focus on interaction concepts, ergonomics, and how hand motion could translate to more intuitive and efficient 3D navigation.
+
+16. Final prototype of the MOUS3D that features an ergonomic shape, a 3 DoF dual-sensor trackball (not found in conventional trackball mice)  for directly proportional orbiting, and an additional mouse button dedicated to panning. 
+
+17. Full build procedure for the prototype MOUS3D, with the bill of materials.
+
+18. Work-in-progress enduro mountain bike frame design featuring a novel 5-bar linkage inspired by an earlier patent proposing perfect pedaling rigidity with active suspension while descending: the mountain biking “Holy Grail.” Frame developed with the intent to fabricate and ride the frame. Comparison with the 2016 patent design overlaid in blue. My design preserves the scissor-style linkage while reducing link count and substantially reworking pivot locations to address kinematic issues in the original design.
+Project: Novel Mountain Bike Frame (In progress)
+19. Early CAD model of custom mountain bike frame featuring scissor-style linkage.
+
+20. Leverage ratio vs suspension travel plot for 3 frames: the 2016 design, my design, and a popular modern enduro frame. My design preserves the initial regressive portion of the leverage curve from the original design to prevent a harsh transition from fully stiff pedaling to fully open rebound. However, it then transitions to a progressive curve, which is necessary for high-performance mountain bikes to offer small-bump sensitivity and bottom-out resistance—the biggest shortcoming of the older design.
+
+21. Rear axle path curves for the same three bikes. The significant rearward axle path in my design is characteristic of modern high-performance enduro bikes because of the additional traction it offers in rough terrain. This was achieved by shifting the original pivot points to raise the instant center.
+
+Project: Mesh-based modelling exercises
+22. Model images and renders of two replica cars: my dream car, a 1983 Porsche 911 (964), and my actual car, a manual 2006 Volvo S60 T5. Models were also used to 3D-print scale replicas. Both projects served as an introduction to mesh-driven modeling.
+
+Project: Architecture competitions
+23. Floor plans and renders of two architectural models. Both were for TSA architectural design competitions, where the prompts were to design a vacation home and a museum.
+
+Project: Chain damper
+24. A 3D-Printed chain damper for my brother's mountain bike that reduces the sound and impact from chain slap due to a cheap derailleur. 
+
+Project: Lead Holder
+25. A 3D-Printed ergonomic pencil lead holder/fidget toy
