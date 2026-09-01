@@ -56,3 +56,9 @@ Project: Chain damper
 
 Project: Lead Holder
 25. A 3D-Printed ergonomic pencil lead holder/fidget toy
+
+Project: Research & Development - Penn Engineering
+Subproject: Humidity enclosure project
+27. To enable repeatable measurements on a micro-adhesion tester, I designed a humidity-controlled setup, including a laser-cut acrylic box, dry air inlet and diffuser, and hygrometer.
+
+28. This setup successfully reduced the humidity levels in the enclosure, and as seen in the figure achieved a sufficiently small noise signal of .05 mN, comparable to the original setup.
